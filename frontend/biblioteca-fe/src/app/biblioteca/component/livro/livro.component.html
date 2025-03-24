@@ -1,0 +1,70 @@
+<div class="mb-4">
+  <input pInputText type="text" placeholder="Pesquisar..." [(ngModel)]="textoPesquisa" (input)="pesquisar()" />
+</div>
+
+<div class="mb-4">
+  <p-button (click)="novo()" label="Novo" class="mr-4" icon="pi pi-plus" iconPos="left" />
+  <p-button (click)="baixarExcel()" icon="pi pi-file-excel" iconPos="left" label="Exportar relatório em excel" severity="secondary">
+  </p-button>
+</div>
+
+<p-table
+  id="table"
+  [value]="livros"
+  [paginator]="true"
+  [(rows)]="numLinhas"
+  [first]="itemAtual"
+  [showCurrentPageReport]="true"
+  [tableStyle]="{ 'min-width': '50rem' }"
+  currentPageReportTemplate="Mostrando {first} até {last} de {totalRecords} elementos"
+  (onLazyLoad)="paginar($event)"
+  [rowsPerPageOptions]="[2, 5, 10, 20]"
+  [lazy]="true"
+  [totalRecords]="numeroTotalElementos"
+  dataKey="codl"
+>
+  <ng-template #header>
+    <tr>
+      <th style="width:20%">Código</th>
+      <th style="width:30%">Título</th>
+      <th style="width:30%">Editora</th>
+      <th style="width:20%">Ações</th>
+    </tr>
+  </ng-template>
+  <ng-template #body let-livro let-ri="rowIndex">
+    <tr>
+      <td>{{ livro.codl }}</td>
+      <td>{{ livro.titulo }}</td>
+      <td>{{ livro.editora }}</td>
+      <td>
+        <div class="flex items-center justify-center gap-2">
+          <button
+            pButton
+            pRipple
+            type="button"
+            (click)="editar($event, livro)"
+            text
+            rounded
+            severity="secondary"
+          >
+            <PencilIcon pButtonIcon/>
+          </button>
+
+          <button
+            pButton
+            pRipple
+            type="button"
+            (click)="confirmarDelecao($event, livro)"
+            text
+            rounded
+            severity="danger"
+          >
+            <TrashIcon pButtonIcon/>
+          </button>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-confirm-dialog />

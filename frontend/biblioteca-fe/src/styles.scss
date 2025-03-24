@@ -1,0 +1,9 @@
+/* You can add global styles to this file, and also import other style files */
+@use "tailwindcss" as *;
+@import "primeicons/primeicons.css";
+
+.fixed-size-grid {
+  width: 100%;
+  min-width: 50vw; /* Defina o tamanho mínimo desejado */
+  max-width: 50vw; /* Defina o tamanho máximo desejado */
+}

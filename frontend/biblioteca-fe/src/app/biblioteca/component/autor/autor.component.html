@@ -1,0 +1,125 @@
+<div class="mb-4">
+  <input pInputText type="text" placeholder="Pesquisar..." [(ngModel)]="textoPesquisa" (input)="pesquisar()" />
+</div>
+
+<div class="mb-4">
+  <p-button (click)="mostrarNovoDialog()" label="Novo" icon="pi pi-plus" iconPos="left" />
+</div>
+
+<p-table
+  id="table"
+  [value]="autores"
+  [paginator]="true"
+  [(rows)]="numLinhas"
+  [first]="itemAtual"
+  [showCurrentPageReport]="true"
+  [tableStyle]="{ 'min-width': '50rem' }"
+  currentPageReportTemplate="Mostrando {first} até {last} de {totalRecords} elementos"
+  (onLazyLoad)="paginar($event)"
+  [rowsPerPageOptions]="[2, 5, 10, 20]"
+  [lazy]="true"
+  [totalRecords]="numeroTotalElementos"
+  editMode="row"
+  dataKey="codau"
+>
+  <ng-template #header>
+    <tr>
+      <th style="width:20%">Código</th>
+      <th style="width:60%">Nome</th>
+      <th style="width:20%">Ações</th>
+    </tr>
+  </ng-template>
+  <ng-template #body let-autor let-ri="rowIndex" let-editing="editing">
+    <tr [pEditableRow]="autor">
+      <td>{{ autor.codau }}</td>
+      <td>
+        <p-cellEditor>
+          <ng-template #input>
+            <input
+              pInputText type="text"
+              [(ngModel)]="autor.nome"
+              required />
+          </ng-template>
+          <ng-template #output>
+            {{autor.nome}}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td>
+        <div class="flex items-center justify-center gap-2">
+          <button
+            *ngIf="!editing"
+            pButton
+            pRipple
+            type="button"
+            pInitEditableRow
+            (click)="iniciarEdicao(autor)"
+            text
+            rounded
+            severity="secondary"
+          >
+            <PencilIcon pButtonIcon/>
+          </button>
+
+          <button
+            *ngIf="!editing"
+            pButton
+            pRipple
+            type="button"
+            (click)="confirmarDelecao($event, autor)"
+            text
+            rounded
+            severity="danger"
+          >
+            <TrashIcon pButtonIcon/>
+          </button>
+          <button
+            *ngIf="editing"
+            pButton
+            pRipple
+            type="button"
+            pSaveEditableRow
+            (click)="atualizarAutor(autor)"
+            text
+            rounded
+            severity="secondary"
+          >
+            <CheckIcon pButtonIcon />
+          </button>
+          <button
+            *ngIf="editing"
+            pButton
+            pRipple
+            type="button"
+            pCancelEditableRow
+            (click)="cancelarEdicao(autor)"
+            text
+            rounded
+            severity="secondary"
+          >
+            <TimesIcon pButtonIcon/>
+
+          </button>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog [(visible)]="dialogoNovoVisivel" [modal]="true" [style]="{ width: '25rem' }">
+  <ng-template #header>
+    <div class="inline-flex items-center justify-center gap-2">
+      <span class="font-bold whitespace-nowrap">Novo Autor</span>
+    </div>
+  </ng-template>
+  <span class="text-surface-500 dark:text-surface-400 block mb-8">Insira um nome</span>
+  <div class="flex items-center gap-4 mb-4">
+    <label for="nome" class="font-semibold w-24">Nome</label>
+    <input pInputText [(ngModel)]="novoAutor.nome" id="nome" class="flex-auto" autocomplete="off" />
+  </div>
+  <ng-template #footer>
+    <p-button label="Cancel" [text]="true" severity="secondary" (click)="dialogoNovoVisivel = false" />
+    <p-button label="Save" severity="primary" (click)="salvarNovoAutor()" />
+  </ng-template>
+</p-dialog>
+<p-confirm-dialog />

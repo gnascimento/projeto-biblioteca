@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: Gabriel Nascimento
+      changes:
+        - sqlFile:
+            path: baseline.sql
+            relativeToChangelogFile: true
+  - changeSet:
+      id: 2
+      author: Gabriel Nascimento
+      changes:
+        - sqlFile:
+            path: 0001-novo-campo-valor.sql
+            relativeToChangelogFile: true
+  - changeSet:
+      id: 3
+      author: Gabriel Nascimento
+      changes:
+        - sqlFile:
+            path: 0002-view-relatorio.sql
+            relativeToChangelogFile: true

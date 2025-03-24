@@ -1,0 +1,65 @@
+<div class="p-4">
+  <form [formGroup]="livroForm" (ngSubmit)="onSubmit()" class="space-y-4">
+    <div *ngIf="formErros.length > 0">
+        <p-message *ngFor="let erro of formErros" severity="error">{{ erro }}</p-message>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 fixed-size-grid">
+      <div class="flex flex-col">
+        <label for="titulo" class="mb-2">Título(*)</label>
+        <input pInputText id="titulo" formControlName="titulo" class="p-inputtext p-component"/>
+      </div>
+
+      <div class="flex flex-col">
+        <label for="editora" class="mb-2">Editora(*)</label>
+        <input pInputText id="editora" formControlName="editora" class="p-inputtext p-component"/>
+      </div>
+
+      <div class="flex flex-col">
+        <label for="edicao" class="mb-2">Edição</label>
+        <input pInputText id="edicao" type="number" min="1" max="100" formControlName="edicao" class="p-inputtext p-component"/>
+      </div>
+
+      <div class="flex flex-col">
+        <label for="anoPublicacao" class="mb-2">Ano de Publicação {{livroForm.get('anoPublicacao')?.value}}</label>
+        <p-select id="anoPublicacao"
+                  formControlName="anoPublicacao"
+                  [options]="anos" class="w-full md:w-56"
+                  placeholder="Selecione um ano"/>
+      </div>
+
+      <div class="flex flex-col">
+        <label for="valor" class="mb-2">Valor (R$)</label>
+        <p-input-number id="valor" formControlName="valor" mode="currency" currency="BRL" locale="pt-BR"
+                        class="p-inputnumber p-component"/>
+      </div>
+
+      <div class="flex flex-col col-span-2 max-w-full">
+        <label for="autores" class="mb-2">Autores(*)</label>
+        <p-autoComplete id="autores" formControlName="autores" [suggestions]="filteredAutores"
+                        inputStyleClass="w-full min-w-full max-w-full"
+                        styleClass="w-full min-w-full max-w-full"
+                        panelStyleClass="w-full min-w-full max-w-full"
+                        (completeMethod)="filterAutores($event)" optionLabel="nome" multiple="true"/>
+      </div>
+
+      <div class="flex flex-col col-span-2 max-w-full">
+        <label for="assuntos" class="mb-2">Assuntos(*)</label>
+        <p-autoComplete id="assuntos" formControlName="assuntos" [suggestions]="filteredAssuntos"
+                        inputStyleClass="w-full min-w-full max-w-full"
+                        styleClass="w-full min-w-full max-w-full"
+                        panelStyleClass="w-full min-w-full max-w-full"
+                        (completeMethod)="filterAssuntos($event)" optionLabel="descricao" multiple="true"/>
+      </div>
+    </div>
+
+
+    <div class="flex justify-end">
+      <button pButton type="submit" class="p-button p-component">
+        <span pButtonLabel>Salvar</span>
+      </button>
+    </div>
+    <div class="flex justify-end">
+      <p class="mensagem-obrigatoria">Os campos com (*) são obrigatórios</p>
+    </div>
+  </form>
+</div>
