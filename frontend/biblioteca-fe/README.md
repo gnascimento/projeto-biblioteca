@@ -50,7 +50,7 @@ Por padrão, o build de produção otimiza sua aplicação para desempenho e vel
 
 ## Executando Testes Unitários
 
-Para executar testes unitários com o [Karma](https://karma-runner.github.io), utilize o seguinte comando:
+No momento não foram desenvolvidos testes para o Frontend. No futuro, caso sejam criados, para executar testes unitários com o [Karma](https://karma-runner.github.io), utilize o seguinte comando:
 
 ```bash
 ng test
@@ -58,7 +58,7 @@ ng test
 
 ## Executando Testes de Ponta a Ponta (End-to-End)
 
-Para testes de ponta a ponta (e2e), execute:
+Também não desenvolvi no momento testes e2e. Mas se um dia estiverem feitos, para executar testes de ponta a ponta (e2e), execute:
 
 ```bash
 ng e2e
