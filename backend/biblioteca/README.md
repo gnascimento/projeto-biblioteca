@@ -13,7 +13,7 @@ Este é um projeto de exemplo de uma biblioteca, desenvolvido com Java, Spring B
 ## Configuração do Projeto
 ### Pré-requisitos
 - JDK 21 ou superior
-- Gradle 7.5 ou superior
+- Gradle 8.5 ou superior
 - PostgreSQL 17.4
 
 ### Configuração do Banco de Dados
