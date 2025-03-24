@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  postgres-biblioteca:
+    image: postgres:17.4
+    container_name: postgres-biblioteca
+    environment:
+      POSTGRES_DB: biblioteca
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  biblioteca:
+    image: biblioteca:latest
+    container_name: biblioteca
+    environment:
+      DATABASE_HOST: postgres-biblioteca
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: admin
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres-biblioteca
+
+volumes:
+  postgres_data:

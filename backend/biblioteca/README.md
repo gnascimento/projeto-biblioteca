@@ -23,16 +23,16 @@ Para configurar o banco de dados no `application.properties` e iniciar um contê
 
 1. **Configuração do Banco de Dados no `application.properties`:**
 
-   Certifique-se de que o arquivo `src/main/resources/application.properties` está configurado corretamente:
+   Certifique-se de que o arquivo `src/main/resources/application.properties` está configurado corretamente. Você pode usar as variáveis de ambiente, se desejar:
    ```ini
    # Configurações do Liquibase
    spring.liquibase.change-log=classpath:db/changelog/db.changelog-master.yaml
    spring.liquibase.enabled=true
 
    # Configurações do Banco de Dados
-   spring.datasource.url=jdbc:postgresql://localhost:5432/biblioteca
-   spring.datasource.username=postgres
-   spring.datasource.password=admin
+   spring.datasource.url=jdbc:postgresql://${DATABASE_HOST:localhost}:5432/biblioteca
+   spring.datasource.username=${DATABASE_USERNAME:postgres}
+   spring.datasource.password=${DATABASE_PASSWORD:admin}
    spring.datasource.driver-class-name=org.postgresql.Driver
    ```
 
