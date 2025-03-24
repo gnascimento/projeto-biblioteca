@@ -2,6 +2,15 @@
 
 Este projeto foi gerado utilizando o [Angular CLI](https://github.com/angular/angular-cli) versão 19.2.4.
 
+## Instalar pacotes
+
+Para instalar os pacotes, execute:
+
+```bash
+npm install
+```
+
+
 ## Servidor de Desenvolvimento
 
 Para iniciar um servidor de desenvolvimento local, execute:
